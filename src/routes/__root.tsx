@@ -42,12 +42,9 @@ function RootComponent() {
   return (
     <JeeewonProvider>
       <CssBaseline />
-      <Container>
+      <Container sx={{ margin: 0, padding: 0 }}>
         <Menu open={open} setOpen={setOpen} />
         <Main open={open}>
-          Design SystemDesign SystemDesign SystemDesign SystemDesign SystemDesign SystemDesign System Design SystemDesign SystemDesign SystemDesign
-          SystemDesign SystemDesign SystemDesign System Design SystemDesign SystemDesign SystemDesign SystemDesign SystemDesign SystemDesign System
-          Design SystemDesign SystemDesign SystemDesign SystemDesign SystemDesign SystemDesign System
           <Outlet />
         </Main>
       </Container>
