@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ButtonIndexRouteImport } from './routes/button/index'
+import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ButtonIndexRoute = ButtonIndexRouteImport.update({
+  id: '/button/',
+  path: '/button/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutocompleteIndexRoute = AutocompleteIndexRouteImport.update({
+  id: '/autocomplete/',
+  path: '/autocomplete/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/autocomplete': typeof AutocompleteIndexRoute
+  '/button': typeof ButtonIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/autocomplete': typeof AutocompleteIndexRoute
+  '/button': typeof ButtonIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/autocomplete/': typeof AutocompleteIndexRoute
+  '/button/': typeof ButtonIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/autocomplete' | '/button'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/autocomplete' | '/button'
+  id: '__root__' | '/' | '/autocomplete/' | '/button/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutocompleteIndexRoute: typeof AutocompleteIndexRoute
+  ButtonIndexRoute: typeof ButtonIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/button/': {
+      id: '/button/'
+      path: '/button'
+      fullPath: '/button'
+      preLoaderRoute: typeof ButtonIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/autocomplete/': {
+      id: '/autocomplete/'
+      path: '/autocomplete'
+      fullPath: '/autocomplete'
+      preLoaderRoute: typeof AutocompleteIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutocompleteIndexRoute: AutocompleteIndexRoute,
+  ButtonIndexRoute: ButtonIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

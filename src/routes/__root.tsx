@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { CssBaseline, JeeewonProvider } from '@jeeewon/ui';
 import { Container } from '@jeeewon/ui';
-import Menu from '../_lib/components/Menu';
-import { styled } from '@mui/material/styles';
+import { Menu } from '@/_lib/components';
+import { styled, GlobalStyles } from '@mui/material';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -42,6 +42,33 @@ function RootComponent() {
   return (
     <JeeewonProvider>
       <CssBaseline />
+      <GlobalStyles
+        styles={{
+          '*': {
+            // Chrome, Safari, Edge
+            '&::-webkit-scrollbar': {
+              width: '4px',
+              height: '4px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: 'transparent',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: '#888',
+              '&:hover': {
+                background: '#555',
+              },
+            },
+            // 위/아래 화살표 제거
+            '&::-webkit-scrollbar-button': {
+              display: 'none',
+            },
+            // Firefox
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#888 transparent',
+          },
+        }}
+      />
       <Container sx={{ margin: 0, padding: 0 }}>
         <Menu open={open} setOpen={setOpen} />
         <Main open={open}>

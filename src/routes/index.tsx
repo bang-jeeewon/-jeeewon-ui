@@ -17,7 +17,7 @@ import {
   Autocomplete,
   createFilterOptions,
 } from '@jeeewon/ui';
-import Spacing from '@/_lib/components/Spacing';
+import { Spacing } from '@/_lib/components';
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -129,13 +129,13 @@ function RouteComponent() {
         카드 레이아웃
       </Typography>
       <Box sx={{ display: 'flex', gap: 2, marginBottom: 4, flexWrap: 'wrap' }}>
-        <Card sx={{ minWidth: 300 }}>
+        <Card sx={{ minWidth: 300, backgroundColor: 'primary.main' }}>
           <CardHeader title="카드 제목" />
           <CardContent>
             <Typography>카드 내용입니다.</Typography>
           </CardContent>
         </Card>
-        <Card sx={{ minWidth: 300 }}>
+        <Card sx={{ minWidth: 300, backgroundColor: 'secondary.main' }}>
           <CardHeader title="다른 카드" />
           <CardContent>
             <Typography>다른 카드의 내용입니다.</Typography>

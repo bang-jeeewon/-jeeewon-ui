@@ -13,13 +13,15 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.9",
-    "@jeeewon/ui": "^0.4.2",
+    "@jeeewon/ui": "^0.5.0",
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
     "@tanstack/react-router": "^1.139.3",
     "@tanstack/router-devtools": "^1.139.3",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-syntax-highlighter": "^16.1.0"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.13.5",
