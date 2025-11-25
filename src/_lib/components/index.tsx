@@ -5,3 +5,4 @@ export { default as Menu } from './Menu';
 export { default as CodeBlock } from './CodeBlock';
 export { default as IndexComponent } from './IndexComponent';
 export type { IndexItem } from './IndexComponent';
+export { default as TitleComponent } from './TitleComponent';

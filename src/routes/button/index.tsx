@@ -1,6 +1,6 @@
-import { Divider, Typography, Box, Button, IconButton, Tooltip, badgeClasses } from '@jeeewon/ui';
+import { Typography, Box, Button, IconButton, Tooltip, badgeClasses } from '@jeeewon/ui';
 import { Add, Delete, Alarm, AddShoppingCart, Fingerprint, Badge, ShoppingCart, CloudUpload } from '@jeeewon/ui';
-import { SampleBox, Code, Spacing, CodeBlock } from '@/_lib/components';
+import { SampleBox, Code, Spacing, CodeBlock, TitleComponent } from '@/_lib/components';
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { styled } from '@jeeewon/ui';
@@ -42,14 +42,7 @@ function RouteComponent() {
 
   return (
     <>
-      <Typography variant="h4" sx={{ marginBottom: 4, fontWeight: 'bold' }}>
-        Button
-      </Typography>
-      <Typography color="text.secondary" sx={{ marginBottom: 2 }}>
-        버튼은 사용자가 한 번의 탭으로 작업을 수행하고 선택할 수 있게 해줍니다.
-      </Typography>
-      <Divider />
-      <Spacing size={32} />
+      <TitleComponent title="Button" description="버튼은 사용자가 수행할 수 있는 작업을 나타냅니다." />
       <Typography sx={{ marginBottom: 1 }}>버튼은 사용자가 수행할 수 있는 작업을 나타냅니다.</Typography>
       {buttonsUI.map((ui) => (
         <Box key={ui} sx={{ display: 'flex', alignItems: 'center', marginLeft: 2 }}>
