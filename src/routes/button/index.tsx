@@ -63,7 +63,7 @@ function RouteComponent() {
         Basic button
       </Typography>
       <Typography>
-        <Code>Button</Code>은 세 가지 <Code>variant</Code>를 제공합니다: <Code>text</Code> (기본값), <Code>contained</Code>, <Code>outlined</Code>.
+        <Code>Button</Code>은 세 가지 <Code>variant</Code>를 제공합니다: <Code>text</Code> (default), <Code>contained</Code>, <Code>outlined</Code>.
       </Typography>
       <SampleBox
         UI={
