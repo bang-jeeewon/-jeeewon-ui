@@ -139,7 +139,7 @@ export default function Menu({ open, setOpen }: MenuProps) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Design System
+            Jeeewon Design System
           </Typography>
           <Search>
             <SearchIconWrapper>
