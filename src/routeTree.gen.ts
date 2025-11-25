@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ButtonIndexRouteImport } from './routes/button/index'
+import { Route as ButtonGroupIndexRouteImport } from './routes/button-group/index'
 import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const ButtonIndexRoute = ButtonIndexRouteImport.update({
   path: '/button/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ButtonGroupIndexRoute = ButtonGroupIndexRouteImport.update({
+  id: '/button-group/',
+  path: '/button-group/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AutocompleteIndexRoute = AutocompleteIndexRouteImport.update({
   id: '/autocomplete/',
   path: '/autocomplete/',
@@ -32,30 +38,34 @@ const AutocompleteIndexRoute = AutocompleteIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/autocomplete': typeof AutocompleteIndexRoute
+  '/button-group': typeof ButtonGroupIndexRoute
   '/button': typeof ButtonIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/autocomplete': typeof AutocompleteIndexRoute
+  '/button-group': typeof ButtonGroupIndexRoute
   '/button': typeof ButtonIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/autocomplete/': typeof AutocompleteIndexRoute
+  '/button-group/': typeof ButtonGroupIndexRoute
   '/button/': typeof ButtonIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/autocomplete' | '/button'
+  fullPaths: '/' | '/autocomplete' | '/button-group' | '/button'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/autocomplete' | '/button'
-  id: '__root__' | '/' | '/autocomplete/' | '/button/'
+  to: '/' | '/autocomplete' | '/button-group' | '/button'
+  id: '__root__' | '/' | '/autocomplete/' | '/button-group/' | '/button/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AutocompleteIndexRoute: typeof AutocompleteIndexRoute
+  ButtonGroupIndexRoute: typeof ButtonGroupIndexRoute
   ButtonIndexRoute: typeof ButtonIndexRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ButtonIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/button-group/': {
+      id: '/button-group/'
+      path: '/button-group'
+      fullPath: '/button-group'
+      preLoaderRoute: typeof ButtonGroupIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/autocomplete/': {
       id: '/autocomplete/'
       path: '/autocomplete'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AutocompleteIndexRoute: AutocompleteIndexRoute,
+  ButtonGroupIndexRoute: ButtonGroupIndexRoute,
   ButtonIndexRoute: ButtonIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Fragment } from 'react';
 import {
   Toolbar,
   IconButton,
@@ -169,8 +169,8 @@ export default function Menu({ open, setOpen }: MenuProps) {
         <Divider />
         <List>
           {menus.map((category) => (
-            <>
-              <StyledListHeader key={`category-${category.id}`}>{category.label}</StyledListHeader>
+            <Fragment key={`category-${category.id}`}>
+              <StyledListHeader>{category.label}</StyledListHeader>
               <List>
                 {category.items.map((item) => (
                   <ListItem key={`menu-${item.label}`} disablePadding>
@@ -180,7 +180,7 @@ export default function Menu({ open, setOpen }: MenuProps) {
                   </ListItem>
                 ))}
               </List>
-            </>
+            </Fragment>
           ))}
         </List>
       </Drawer>

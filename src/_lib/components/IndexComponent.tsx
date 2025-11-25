@@ -34,7 +34,9 @@ const StyledListItem = styled(ListItem)<{ level: number }>(({ theme, level }) =>
   paddingBottom: 0,
 }));
 
-const StyledListItemButton = styled(ListItemButton)<{ active?: boolean }>(({ theme, active }) => ({
+const StyledListItemButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active }) => ({
   paddingTop: theme.spacing(0.5),
   paddingBottom: theme.spacing(0.5),
   borderRadius: theme.shape.borderRadius,
@@ -66,6 +68,7 @@ function generateId(text: string): string {
 function extractIndexItems(container: Document | Element = document): IndexItem[] {
   const items: IndexItem[] = [];
   const headings = container.querySelectorAll('h4, h5, h6');
+  const usedIds = new Set<string>();
 
   headings.forEach((heading) => {
     const text = heading.textContent?.trim() || '';
@@ -77,9 +80,19 @@ function extractIndexItems(container: Document | Element = document): IndexItem[
     // id가 없으면 자동 생성
     if (!id) {
       id = generateId(text);
+
+      // 중복된 id가 있으면 고유하게 만들기
+      let uniqueId = id;
+      let counter = 1;
+      while (usedIds.has(uniqueId)) {
+        uniqueId = `${id}-${counter}`;
+        counter++;
+      }
+      id = uniqueId;
       heading.id = id;
     }
 
+    usedIds.add(id);
     items.push({ id, text, level });
   });
 
