@@ -59,7 +59,6 @@ const ContentArea = styled(Box)(({ theme }) => ({
 }));
 
 const SidebarArea = styled(Box)(({ theme }) => ({
-  width: 240,
   flexShrink: 0,
   height: '100%',
   overflowY: 'auto',
@@ -103,7 +102,7 @@ function RootComponent() {
           },
         }}
       />
-      <Container sx={{ margin: 0, padding: 0 }} maxWidth="xl">
+      <Container sx={{ margin: 0, padding: 0 }} maxWidth={false}>
         <Menu open={open} setOpen={setOpen} />
         <Main open={open}>
           <ContentWrapper>
