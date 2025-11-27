@@ -178,6 +178,18 @@ function RouteComponent() {
             </Fab>
           </Box>
         }
+        code={`<Fab variant="extended" size="small" color="primary">
+  <Navigation sx={{ mr: 1 }} />
+  Extended
+</Fab>
+<Fab variant="extended" size="medium" color="primary">
+  <Navigation sx={{ mr: 1 }} />
+  Extended
+</Fab>
+<Fab variant="extended" color="primary">
+  <Navigation sx={{ mr: 1 }} />
+  Extended
+</Fab>`}
       />
 
       <Typography variant="h5" sx={{ marginBottom: 1, fontWeight: 'bold' }}>
