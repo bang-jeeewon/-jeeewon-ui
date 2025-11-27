@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RatingIndexRouteImport } from './routes/rating/index'
 import { Route as RadioGroupIndexRouteImport } from './routes/radio-group/index'
 import { Route as FloatingActionButtonIndexRouteImport } from './routes/floating-action-button/index'
 import { Route as CheckboxIndexRouteImport } from './routes/checkbox/index'
@@ -20,6 +21,11 @@ import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/ind
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatingIndexRoute = RatingIndexRouteImport.update({
+  id: '/rating/',
+  path: '/rating/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RadioGroupIndexRoute = RadioGroupIndexRouteImport.update({
@@ -62,6 +68,7 @@ export interface FileRoutesByFullPath {
   '/checkbox': typeof CheckboxIndexRoute
   '/floating-action-button': typeof FloatingActionButtonIndexRoute
   '/radio-group': typeof RadioGroupIndexRoute
+  '/rating': typeof RatingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByTo {
   '/checkbox': typeof CheckboxIndexRoute
   '/floating-action-button': typeof FloatingActionButtonIndexRoute
   '/radio-group': typeof RadioGroupIndexRoute
+  '/rating': typeof RatingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -81,6 +89,7 @@ export interface FileRoutesById {
   '/checkbox/': typeof CheckboxIndexRoute
   '/floating-action-button/': typeof FloatingActionButtonIndexRoute
   '/radio-group/': typeof RadioGroupIndexRoute
+  '/rating/': typeof RatingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
     | '/checkbox'
     | '/floating-action-button'
     | '/radio-group'
+    | '/rating'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
     | '/checkbox'
     | '/floating-action-button'
     | '/radio-group'
+    | '/rating'
   id:
     | '__root__'
     | '/'
@@ -110,6 +121,7 @@ export interface FileRouteTypes {
     | '/checkbox/'
     | '/floating-action-button/'
     | '/radio-group/'
+    | '/rating/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -120,6 +132,7 @@ export interface RootRouteChildren {
   CheckboxIndexRoute: typeof CheckboxIndexRoute
   FloatingActionButtonIndexRoute: typeof FloatingActionButtonIndexRoute
   RadioGroupIndexRoute: typeof RadioGroupIndexRoute
+  RatingIndexRoute: typeof RatingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -129,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rating/': {
+      id: '/rating/'
+      path: '/rating'
+      fullPath: '/rating'
+      preLoaderRoute: typeof RatingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/radio-group/': {
@@ -184,6 +204,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckboxIndexRoute: CheckboxIndexRoute,
   FloatingActionButtonIndexRoute: FloatingActionButtonIndexRoute,
   RadioGroupIndexRoute: RadioGroupIndexRoute,
+  RatingIndexRoute: RatingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
