@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FloatingActionButtonIndexRouteImport } from './routes/floating-action-button/index'
 import { Route as CheckboxIndexRouteImport } from './routes/checkbox/index'
 import { Route as ButtonIndexRouteImport } from './routes/button/index'
 import { Route as ButtonGroupIndexRouteImport } from './routes/button-group/index'
@@ -20,6 +21,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FloatingActionButtonIndexRoute =
+  FloatingActionButtonIndexRouteImport.update({
+    id: '/floating-action-button/',
+    path: '/floating-action-button/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CheckboxIndexRoute = CheckboxIndexRouteImport.update({
   id: '/checkbox/',
   path: '/checkbox/',
@@ -47,6 +54,7 @@ export interface FileRoutesByFullPath {
   '/button-group': typeof ButtonGroupIndexRoute
   '/button': typeof ButtonIndexRoute
   '/checkbox': typeof CheckboxIndexRoute
+  '/floating-action-button': typeof FloatingActionButtonIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +62,7 @@ export interface FileRoutesByTo {
   '/button-group': typeof ButtonGroupIndexRoute
   '/button': typeof ButtonIndexRoute
   '/checkbox': typeof CheckboxIndexRoute
+  '/floating-action-button': typeof FloatingActionButtonIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,12 +71,25 @@ export interface FileRoutesById {
   '/button-group/': typeof ButtonGroupIndexRoute
   '/button/': typeof ButtonIndexRoute
   '/checkbox/': typeof CheckboxIndexRoute
+  '/floating-action-button/': typeof FloatingActionButtonIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/autocomplete' | '/button-group' | '/button' | '/checkbox'
+  fullPaths:
+    | '/'
+    | '/autocomplete'
+    | '/button-group'
+    | '/button'
+    | '/checkbox'
+    | '/floating-action-button'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/autocomplete' | '/button-group' | '/button' | '/checkbox'
+  to:
+    | '/'
+    | '/autocomplete'
+    | '/button-group'
+    | '/button'
+    | '/checkbox'
+    | '/floating-action-button'
   id:
     | '__root__'
     | '/'
@@ -75,6 +97,7 @@ export interface FileRouteTypes {
     | '/button-group/'
     | '/button/'
     | '/checkbox/'
+    | '/floating-action-button/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -83,6 +106,7 @@ export interface RootRouteChildren {
   ButtonGroupIndexRoute: typeof ButtonGroupIndexRoute
   ButtonIndexRoute: typeof ButtonIndexRoute
   CheckboxIndexRoute: typeof CheckboxIndexRoute
+  FloatingActionButtonIndexRoute: typeof FloatingActionButtonIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/floating-action-button/': {
+      id: '/floating-action-button/'
+      path: '/floating-action-button'
+      fullPath: '/floating-action-button'
+      preLoaderRoute: typeof FloatingActionButtonIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkbox/': {
@@ -131,6 +162,7 @@ const rootRouteChildren: RootRouteChildren = {
   ButtonGroupIndexRoute: ButtonGroupIndexRoute,
   ButtonIndexRoute: ButtonIndexRoute,
   CheckboxIndexRoute: CheckboxIndexRoute,
+  FloatingActionButtonIndexRoute: FloatingActionButtonIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
