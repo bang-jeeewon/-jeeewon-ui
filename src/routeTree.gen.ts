@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CheckboxIndexRouteImport } from './routes/checkbox/index'
 import { Route as ButtonIndexRouteImport } from './routes/button/index'
 import { Route as ButtonGroupIndexRouteImport } from './routes/button-group/index'
 import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/index'
@@ -17,6 +18,11 @@ import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/ind
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckboxIndexRoute = CheckboxIndexRouteImport.update({
+  id: '/checkbox/',
+  path: '/checkbox/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ButtonIndexRoute = ButtonIndexRouteImport.update({
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/autocomplete': typeof AutocompleteIndexRoute
   '/button-group': typeof ButtonGroupIndexRoute
   '/button': typeof ButtonIndexRoute
+  '/checkbox': typeof CheckboxIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/autocomplete': typeof AutocompleteIndexRoute
   '/button-group': typeof ButtonGroupIndexRoute
   '/button': typeof ButtonIndexRoute
+  '/checkbox': typeof CheckboxIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,20 @@ export interface FileRoutesById {
   '/autocomplete/': typeof AutocompleteIndexRoute
   '/button-group/': typeof ButtonGroupIndexRoute
   '/button/': typeof ButtonIndexRoute
+  '/checkbox/': typeof CheckboxIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/autocomplete' | '/button-group' | '/button'
+  fullPaths: '/' | '/autocomplete' | '/button-group' | '/button' | '/checkbox'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/autocomplete' | '/button-group' | '/button'
-  id: '__root__' | '/' | '/autocomplete/' | '/button-group/' | '/button/'
+  to: '/' | '/autocomplete' | '/button-group' | '/button' | '/checkbox'
+  id:
+    | '__root__'
+    | '/'
+    | '/autocomplete/'
+    | '/button-group/'
+    | '/button/'
+    | '/checkbox/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +82,7 @@ export interface RootRouteChildren {
   AutocompleteIndexRoute: typeof AutocompleteIndexRoute
   ButtonGroupIndexRoute: typeof ButtonGroupIndexRoute
   ButtonIndexRoute: typeof ButtonIndexRoute
+  CheckboxIndexRoute: typeof CheckboxIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -76,6 +92,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkbox/': {
+      id: '/checkbox/'
+      path: '/checkbox'
+      fullPath: '/checkbox'
+      preLoaderRoute: typeof CheckboxIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/button/': {
@@ -107,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   AutocompleteIndexRoute: AutocompleteIndexRoute,
   ButtonGroupIndexRoute: ButtonGroupIndexRoute,
   ButtonIndexRoute: ButtonIndexRoute,
+  CheckboxIndexRoute: CheckboxIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
