@@ -58,7 +58,7 @@ function RouteComponent() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: unknown, newValue: number) => {
+  const handleChange = (_event: unknown, newValue: number) => {
     setValue(newValue);
   };
 
