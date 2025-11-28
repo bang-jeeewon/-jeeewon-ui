@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SliderIndexRouteImport } from './routes/slider/index'
 import { Route as SelectIndexRouteImport } from './routes/select/index'
 import { Route as RatingIndexRouteImport } from './routes/rating/index'
 import { Route as RadioGroupIndexRouteImport } from './routes/radio-group/index'
@@ -22,6 +23,11 @@ import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/ind
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SliderIndexRoute = SliderIndexRouteImport.update({
+  id: '/slider/',
+  path: '/slider/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SelectIndexRoute = SelectIndexRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/radio-group': typeof RadioGroupIndexRoute
   '/rating': typeof RatingIndexRoute
   '/select': typeof SelectIndexRoute
+  '/slider': typeof SliderIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/radio-group': typeof RadioGroupIndexRoute
   '/rating': typeof RatingIndexRoute
   '/select': typeof SelectIndexRoute
+  '/slider': typeof SliderIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   '/radio-group/': typeof RadioGroupIndexRoute
   '/rating/': typeof RatingIndexRoute
   '/select/': typeof SelectIndexRoute
+  '/slider/': typeof SliderIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
     | '/radio-group'
     | '/rating'
     | '/select'
+    | '/slider'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
     | '/radio-group'
     | '/rating'
     | '/select'
+    | '/slider'
   id:
     | '__root__'
     | '/'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/radio-group/'
     | '/rating/'
     | '/select/'
+    | '/slider/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -146,6 +158,7 @@ export interface RootRouteChildren {
   RadioGroupIndexRoute: typeof RadioGroupIndexRoute
   RatingIndexRoute: typeof RatingIndexRoute
   SelectIndexRoute: typeof SelectIndexRoute
+  SliderIndexRoute: typeof SliderIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/slider/': {
+      id: '/slider/'
+      path: '/slider'
+      fullPath: '/slider'
+      preLoaderRoute: typeof SliderIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/select/': {
@@ -226,6 +246,7 @@ const rootRouteChildren: RootRouteChildren = {
   RadioGroupIndexRoute: RadioGroupIndexRoute,
   RatingIndexRoute: RatingIndexRoute,
   SelectIndexRoute: SelectIndexRoute,
+  SliderIndexRoute: SliderIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

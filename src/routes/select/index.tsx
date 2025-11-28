@@ -73,7 +73,7 @@ function RouteComponent() {
 
   return (
     <>
-      <TitleComponent title="Select" description="옵션에서 하나의 값을 선택할 수 있게 합니다." />
+      <TitleComponent title="Select" description="여러 옵션 중에서 사용자 입력을 수집하는 데 사용됩니다." />
       <Spacing size={32} />
 
       <Typography variant="h5" sx={{ marginBottom: 1, fontWeight: 'bold' }}>
