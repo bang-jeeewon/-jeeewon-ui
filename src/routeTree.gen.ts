@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TransferListIndexRouteImport } from './routes/transfer-list/index'
+import { Route as ToggleButtonIndexRouteImport } from './routes/toggle-button/index'
 import { Route as TextFieldIndexRouteImport } from './routes/text-field/index'
 import { Route as SwitchIndexRouteImport } from './routes/switch/index'
 import { Route as SliderIndexRouteImport } from './routes/slider/index'
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const TransferListIndexRoute = TransferListIndexRouteImport.update({
   id: '/transfer-list/',
   path: '/transfer-list/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToggleButtonIndexRoute = ToggleButtonIndexRouteImport.update({
+  id: '/toggle-button/',
+  path: '/toggle-button/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TextFieldIndexRoute = TextFieldIndexRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/slider': typeof SliderIndexRoute
   '/switch': typeof SwitchIndexRoute
   '/text-field': typeof TextFieldIndexRoute
+  '/toggle-button': typeof ToggleButtonIndexRoute
   '/transfer-list': typeof TransferListIndexRoute
 }
 export interface FileRoutesByTo {
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/slider': typeof SliderIndexRoute
   '/switch': typeof SwitchIndexRoute
   '/text-field': typeof TextFieldIndexRoute
+  '/toggle-button': typeof ToggleButtonIndexRoute
   '/transfer-list': typeof TransferListIndexRoute
 }
 export interface FileRoutesById {
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/slider/': typeof SliderIndexRoute
   '/switch/': typeof SwitchIndexRoute
   '/text-field/': typeof TextFieldIndexRoute
+  '/toggle-button/': typeof ToggleButtonIndexRoute
   '/transfer-list/': typeof TransferListIndexRoute
 }
 export interface FileRouteTypes {
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/slider'
     | '/switch'
     | '/text-field'
+    | '/toggle-button'
     | '/transfer-list'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/slider'
     | '/switch'
     | '/text-field'
+    | '/toggle-button'
     | '/transfer-list'
   id:
     | '__root__'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/slider/'
     | '/switch/'
     | '/text-field/'
+    | '/toggle-button/'
     | '/transfer-list/'
   fileRoutesById: FileRoutesById
 }
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   SliderIndexRoute: typeof SliderIndexRoute
   SwitchIndexRoute: typeof SwitchIndexRoute
   TextFieldIndexRoute: typeof TextFieldIndexRoute
+  ToggleButtonIndexRoute: typeof ToggleButtonIndexRoute
   TransferListIndexRoute: typeof TransferListIndexRoute
 }
 
@@ -214,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/transfer-list'
       fullPath: '/transfer-list'
       preLoaderRoute: typeof TransferListIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/toggle-button/': {
+      id: '/toggle-button/'
+      path: '/toggle-button'
+      fullPath: '/toggle-button'
+      preLoaderRoute: typeof ToggleButtonIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/text-field/': {
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   SliderIndexRoute: SliderIndexRoute,
   SwitchIndexRoute: SwitchIndexRoute,
   TextFieldIndexRoute: TextFieldIndexRoute,
+  ToggleButtonIndexRoute: ToggleButtonIndexRoute,
   TransferListIndexRoute: TransferListIndexRoute,
 }
 export const routeTree = rootRouteImport
