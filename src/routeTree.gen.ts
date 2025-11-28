@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SelectIndexRouteImport } from './routes/select/index'
 import { Route as RatingIndexRouteImport } from './routes/rating/index'
 import { Route as RadioGroupIndexRouteImport } from './routes/radio-group/index'
 import { Route as FloatingActionButtonIndexRouteImport } from './routes/floating-action-button/index'
@@ -21,6 +22,11 @@ import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/ind
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelectIndexRoute = SelectIndexRouteImport.update({
+  id: '/select/',
+  path: '/select/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RatingIndexRoute = RatingIndexRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/floating-action-button': typeof FloatingActionButtonIndexRoute
   '/radio-group': typeof RadioGroupIndexRoute
   '/rating': typeof RatingIndexRoute
+  '/select': typeof SelectIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByTo {
   '/floating-action-button': typeof FloatingActionButtonIndexRoute
   '/radio-group': typeof RadioGroupIndexRoute
   '/rating': typeof RatingIndexRoute
+  '/select': typeof SelectIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -90,6 +98,7 @@ export interface FileRoutesById {
   '/floating-action-button/': typeof FloatingActionButtonIndexRoute
   '/radio-group/': typeof RadioGroupIndexRoute
   '/rating/': typeof RatingIndexRoute
+  '/select/': typeof SelectIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -102,6 +111,7 @@ export interface FileRouteTypes {
     | '/floating-action-button'
     | '/radio-group'
     | '/rating'
+    | '/select'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
     | '/floating-action-button'
     | '/radio-group'
     | '/rating'
+    | '/select'
   id:
     | '__root__'
     | '/'
@@ -122,6 +133,7 @@ export interface FileRouteTypes {
     | '/floating-action-button/'
     | '/radio-group/'
     | '/rating/'
+    | '/select/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -133,6 +145,7 @@ export interface RootRouteChildren {
   FloatingActionButtonIndexRoute: typeof FloatingActionButtonIndexRoute
   RadioGroupIndexRoute: typeof RadioGroupIndexRoute
   RatingIndexRoute: typeof RatingIndexRoute
+  SelectIndexRoute: typeof SelectIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/select/': {
+      id: '/select/'
+      path: '/select'
+      fullPath: '/select'
+      preLoaderRoute: typeof SelectIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rating/': {
@@ -205,6 +225,7 @@ const rootRouteChildren: RootRouteChildren = {
   FloatingActionButtonIndexRoute: FloatingActionButtonIndexRoute,
   RadioGroupIndexRoute: RadioGroupIndexRoute,
   RatingIndexRoute: RatingIndexRoute,
+  SelectIndexRoute: SelectIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
