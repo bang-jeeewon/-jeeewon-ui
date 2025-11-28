@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TransferListIndexRouteImport } from './routes/transfer-list/index'
 import { Route as TextFieldIndexRouteImport } from './routes/text-field/index'
 import { Route as SwitchIndexRouteImport } from './routes/switch/index'
 import { Route as SliderIndexRouteImport } from './routes/slider/index'
@@ -25,6 +26,11 @@ import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/ind
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransferListIndexRoute = TransferListIndexRouteImport.update({
+  id: '/transfer-list/',
+  path: '/transfer-list/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TextFieldIndexRoute = TextFieldIndexRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/slider': typeof SliderIndexRoute
   '/switch': typeof SwitchIndexRoute
   '/text-field': typeof TextFieldIndexRoute
+  '/transfer-list': typeof TransferListIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/slider': typeof SliderIndexRoute
   '/switch': typeof SwitchIndexRoute
   '/text-field': typeof TextFieldIndexRoute
+  '/transfer-list': typeof TransferListIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/slider/': typeof SliderIndexRoute
   '/switch/': typeof SwitchIndexRoute
   '/text-field/': typeof TextFieldIndexRoute
+  '/transfer-list/': typeof TransferListIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/slider'
     | '/switch'
     | '/text-field'
+    | '/transfer-list'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/slider'
     | '/switch'
     | '/text-field'
+    | '/transfer-list'
   id:
     | '__root__'
     | '/'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '/slider/'
     | '/switch/'
     | '/text-field/'
+    | '/transfer-list/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -185,6 +197,7 @@ export interface RootRouteChildren {
   SliderIndexRoute: typeof SliderIndexRoute
   SwitchIndexRoute: typeof SwitchIndexRoute
   TextFieldIndexRoute: typeof TextFieldIndexRoute
+  TransferListIndexRoute: typeof TransferListIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -194,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transfer-list/': {
+      id: '/transfer-list/'
+      path: '/transfer-list'
+      fullPath: '/transfer-list'
+      preLoaderRoute: typeof TransferListIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/text-field/': {
@@ -289,6 +309,7 @@ const rootRouteChildren: RootRouteChildren = {
   SliderIndexRoute: SliderIndexRoute,
   SwitchIndexRoute: SwitchIndexRoute,
   TextFieldIndexRoute: TextFieldIndexRoute,
+  TransferListIndexRoute: TransferListIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
