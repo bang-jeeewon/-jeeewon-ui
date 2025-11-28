@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { TitleComponent, Spacing, Code, SampleBox } from '@/_lib/components';
 import { Switch, Typography, Box, FormGroup, FormControlLabel } from '@jeeewon/ui';
 import { styled } from '@jeeewon/ui';
+import type { SwitchProps } from '@jeeewon/ui';
 
 export const Route = createFileRoute('/switch/')({
   component: RouteComponent,
