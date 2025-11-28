@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TextFieldIndexRouteImport } from './routes/text-field/index'
 import { Route as SwitchIndexRouteImport } from './routes/switch/index'
 import { Route as SliderIndexRouteImport } from './routes/slider/index'
 import { Route as SelectIndexRouteImport } from './routes/select/index'
@@ -24,6 +25,11 @@ import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/ind
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TextFieldIndexRoute = TextFieldIndexRouteImport.update({
+  id: '/text-field/',
+  path: '/text-field/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SwitchIndexRoute = SwitchIndexRouteImport.update({
@@ -90,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/select': typeof SelectIndexRoute
   '/slider': typeof SliderIndexRoute
   '/switch': typeof SwitchIndexRoute
+  '/text-field': typeof TextFieldIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/select': typeof SelectIndexRoute
   '/slider': typeof SliderIndexRoute
   '/switch': typeof SwitchIndexRoute
+  '/text-field': typeof TextFieldIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/select/': typeof SelectIndexRoute
   '/slider/': typeof SliderIndexRoute
   '/switch/': typeof SwitchIndexRoute
+  '/text-field/': typeof TextFieldIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/select'
     | '/slider'
     | '/switch'
+    | '/text-field'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -145,6 +155,7 @@ export interface FileRouteTypes {
     | '/select'
     | '/slider'
     | '/switch'
+    | '/text-field'
   id:
     | '__root__'
     | '/'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
     | '/select/'
     | '/slider/'
     | '/switch/'
+    | '/text-field/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -172,6 +184,7 @@ export interface RootRouteChildren {
   SelectIndexRoute: typeof SelectIndexRoute
   SliderIndexRoute: typeof SliderIndexRoute
   SwitchIndexRoute: typeof SwitchIndexRoute
+  TextFieldIndexRoute: typeof TextFieldIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/text-field/': {
+      id: '/text-field/'
+      path: '/text-field'
+      fullPath: '/text-field'
+      preLoaderRoute: typeof TextFieldIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/switch/': {
@@ -268,6 +288,7 @@ const rootRouteChildren: RootRouteChildren = {
   SelectIndexRoute: SelectIndexRoute,
   SliderIndexRoute: SliderIndexRoute,
   SwitchIndexRoute: SwitchIndexRoute,
+  TextFieldIndexRoute: TextFieldIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
