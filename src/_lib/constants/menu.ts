@@ -28,11 +28,6 @@ const menuItems = [
   },
   {
     category: 1,
-    label: 'Number Field',
-    link: '/number-field',
-  },
-  {
-    category: 1,
     label: 'Radio Group',
     link: '/radio-group',
   },
