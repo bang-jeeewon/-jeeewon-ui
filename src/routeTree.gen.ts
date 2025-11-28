@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SwitchIndexRouteImport } from './routes/switch/index'
 import { Route as SliderIndexRouteImport } from './routes/slider/index'
 import { Route as SelectIndexRouteImport } from './routes/select/index'
 import { Route as RatingIndexRouteImport } from './routes/rating/index'
@@ -23,6 +24,11 @@ import { Route as AutocompleteIndexRouteImport } from './routes/autocomplete/ind
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SwitchIndexRoute = SwitchIndexRouteImport.update({
+  id: '/switch/',
+  path: '/switch/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SliderIndexRoute = SliderIndexRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/rating': typeof RatingIndexRoute
   '/select': typeof SelectIndexRoute
   '/slider': typeof SliderIndexRoute
+  '/switch': typeof SwitchIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/rating': typeof RatingIndexRoute
   '/select': typeof SelectIndexRoute
   '/slider': typeof SliderIndexRoute
+  '/switch': typeof SwitchIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/rating/': typeof RatingIndexRoute
   '/select/': typeof SelectIndexRoute
   '/slider/': typeof SliderIndexRoute
+  '/switch/': typeof SwitchIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
     | '/rating'
     | '/select'
     | '/slider'
+    | '/switch'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
     | '/rating'
     | '/select'
     | '/slider'
+    | '/switch'
   id:
     | '__root__'
     | '/'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/rating/'
     | '/select/'
     | '/slider/'
+    | '/switch/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -159,6 +171,7 @@ export interface RootRouteChildren {
   RatingIndexRoute: typeof RatingIndexRoute
   SelectIndexRoute: typeof SelectIndexRoute
   SliderIndexRoute: typeof SliderIndexRoute
+  SwitchIndexRoute: typeof SwitchIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -168,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/switch/': {
+      id: '/switch/'
+      path: '/switch'
+      fullPath: '/switch'
+      preLoaderRoute: typeof SwitchIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/slider/': {
@@ -247,6 +267,7 @@ const rootRouteChildren: RootRouteChildren = {
   RatingIndexRoute: RatingIndexRoute,
   SelectIndexRoute: SelectIndexRoute,
   SliderIndexRoute: SliderIndexRoute,
+  SwitchIndexRoute: SwitchIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
